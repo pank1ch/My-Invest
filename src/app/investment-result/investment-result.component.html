@@ -1,24 +1,30 @@
-<table>
-  <thead>
-    <tr>
-      <th>Year</th>
-      <th>Investment Value</th>
-      <th>Interest (Year)</th>
-      <th>Total Interest</th>
-      <th>Invested Capital</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (investItem of investResults(); track investItem.year) {
-
+@if(investmentResults()){
+  <table>
+    <thead>
       <tr>
-        <td>{{investItem.year}}</td>
-        <td>{{investItem.valueEndOfYear | currency: "GBP":"symbol-narrow"}}</td>
-        <td>{{investItem.interest | currency: "GBP":"symbol-narrow"}}</td>
-        <td>{{investItem.totalInterest | currency: "GBP":"symbol-narrow"}}</td>
-        <td>{{investItem.totalAmountInvested | currency: "GBP":"symbol-narrow"}}</td>
+        <th>Year</th>
+        <th>Investment Value</th>
+        <th>Interest (Year)</th>
+        <th>Total Interest</th>
+        <th>Invested Capital</th>
       </tr>
+    </thead>
+    <tbody>
+      @for (investItem of investmentResults(); track investItem.year) {
 
-    }
-  </tbody>
-</table>
+        <tr>
+          <td>{{investItem.year}}</td>
+          <td>{{investItem.valueEndOfYear | currency: "GBP":"symbol-narrow"}}</td>
+          <td>{{investItem.interest | currency: "GBP":"symbol-narrow"}}</td>
+          <td>{{investItem.totalInterest | currency: "GBP":"symbol-narrow"}}</td>
+          <td>{{investItem.totalAmountInvested | currency: "GBP":"symbol-narrow"}}</td>
+        </tr>
+
+      }
+    </tbody>
+  </table>
+}
+@else {
+  <p>Please enter some values and press "Calculate"</p>
+}
+
