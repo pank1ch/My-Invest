@@ -1,2 +1,3 @@
-# My-Invest
-Simple investment calculator
+# Investment Calculator btw.
+
+

@@ -1,0 +1,9 @@
+<app-header />
+<app-user-input (calculate)="onUserSubmit($event)"/>
+
+@if (investmentResults()){
+  <app-investment-result [investResults]="investmentResults()" />
+}
+@else {
+  <p>Please enter some values and press "Calculate"</p>
+}
