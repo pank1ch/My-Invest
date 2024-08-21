@@ -1,7 +1,6 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PreInvestData } from '../investment.model';
-
+import { InvestmentService } from '../investment.service';
 
 @Component({
   selector: 'app-user-input',
@@ -12,7 +11,7 @@ import { PreInvestData } from '../investment.model';
 })
 export class UserInputComponent {
 
-  calculate = output<PreInvestData>();
+  investmentService = inject(InvestmentService);
 
   enteredInitialInvestment = signal('0');
   enteredAnnualInvestment = signal('0');
@@ -20,25 +19,23 @@ export class UserInputComponent {
   enteredDuration = signal('10');
 
   onUserSubmit(){
-
     const newInvestmentData = {
       initialInvestment: +this.enteredInitialInvestment(),
       annualInvestment: +this.enteredAnnualInvestment(),
       expectedReturn: +this.enteredExpectedReturn(),
       duration: +this.enteredDuration(),
     }
-    this.calculate.emit(newInvestmentData);
+
+    this.investmentService.calculateInvestmentResults(newInvestmentData);
 
     this.resetUserForm();
   }
 
   resetUserForm(){
-
     this.enteredInitialInvestment.set('0');
     this.enteredAnnualInvestment.set('0');
     this.enteredExpectedReturn.set('5');
     this.enteredDuration.set('10');
-
   }
 
 }
